@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 試一下 Next.js 13
+Next.js 13 與 12 大版有大幅度的變更。想試看看差多少結果真的變很多。留存記錄一下。   
+ref→[Learn Next.js 13 With This One Project](https://www.youtube.com/watch?v=NgayZAuTgwM&ab_channel=WebDevSimplified)   
 
-## Getting Started
+# 手札
+### VS Code 插件安裝
+開發環境：Visual Studio Code   
+`PostCSS Language Support`、`Tailwind CSS IntelliSense`
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 初始安裝 next app
+```
+npx create-next-app@latest .  
+npm run dev    //------ 開發與 debug
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 安裝 sqlite ORM 模組
+```
+npm i prisma --save-dev   
+npx prisma init --datasource-provider sqlite
+npx prisma migrate dev --name init    //------ 依據 schema.prisma 同步 ORM
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 設定 ORM model - `./schema.prisma`
+```
+model Todo {
+  id        String @id @default(uuid())
+  title     String
+  complete  Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
